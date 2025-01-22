@@ -1,4 +1,4 @@
-package variable_ej;
+package module1.variable_ej;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package fonction_ej;
+package module1.fonction_ej;
 
 public class Main {
     public static void main(String[] args){
