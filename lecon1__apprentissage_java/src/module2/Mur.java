@@ -8,14 +8,8 @@ public class Mur extends Bloc{
         this.porteur = porteur;
     }
 
-    public void afficherBloc() {
-        System.out.println(
-                super.longueur + " " + super.largeur + " " + super.hauteur + " " + this.porteur
-        );
-    }
-
     @Override
-    public void afficherDescription() {
+    public void afficherDescription(){
         System.out.println("Je suis un mur");
     }
 }
