@@ -1,4 +1,6 @@
-package EpicrafterJourney;
+package EpicrafterJourney.Bloc;
+
+import EpicrafterJourney.Interface.IBloc;
 
 public class Rempart {
 

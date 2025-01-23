@@ -1,4 +1,4 @@
-package EpicrafterJourney;
+package EpicrafterJourney.Enum;
 
 public enum Couleur {
     VERT,

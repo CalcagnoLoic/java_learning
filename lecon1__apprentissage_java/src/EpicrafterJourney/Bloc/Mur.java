@@ -1,4 +1,7 @@
-package EpicrafterJourney;
+package EpicrafterJourney.Bloc;
+
+import EpicrafterJourney.Enum.Couleur;
+import EpicrafterJourney.Exceptions.IllegalBlocException;
 
 public class Mur extends Bloc {
     private boolean porteur;

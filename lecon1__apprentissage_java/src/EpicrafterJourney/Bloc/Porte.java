@@ -1,4 +1,8 @@
-package EpicrafterJourney;
+package EpicrafterJourney.Bloc;
+
+import EpicrafterJourney.Enum.Couleur;
+import EpicrafterJourney.Exceptions.IllegalBlocException;
+import EpicrafterJourney.Exceptions.PorteVerrouilleException;
 
 public class Porte extends Bloc {
     private boolean verrouile;

@@ -1,4 +1,8 @@
-package EpicrafterJourney;
+package EpicrafterJourney.Bloc;
+
+import EpicrafterJourney.Enum.Couleur;
+import EpicrafterJourney.Exceptions.IllegalBlocException;
+import EpicrafterJourney.Interface.IBloc;
 
 public abstract class Bloc implements IBloc {
     protected int longueur;

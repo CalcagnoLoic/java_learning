@@ -1,4 +1,4 @@
-package EpicrafterJourney;
+package EpicrafterJourney.Interface;
 
 public interface IBloc {
 

@@ -1,4 +1,6 @@
-package EpicrafterJourney;
+package EpicrafterJourney.Bloc;
+
+import EpicrafterJourney.Exceptions.IllegalBlocException;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

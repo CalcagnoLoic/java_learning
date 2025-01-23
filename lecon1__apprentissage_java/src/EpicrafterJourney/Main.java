@@ -1,17 +1,18 @@
 package EpicrafterJourney;
 
-import java.util.*;
+import EpicrafterJourney.Bloc.Bloc;
+import EpicrafterJourney.Exceptions.IllegalBlocException;
+import EpicrafterJourney.Personnage.Hero;
+import EpicrafterJourney.Interface.IPersonnage;
+import EpicrafterJourney.Personnage.Joueur;
+import EpicrafterJourney.Personnage.Mechant;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
-    public static void  main(String[] args) {
-        try{
-            Porte porte = new Porte(1,5,1,true);
-            porte.verrouiller();
-        } catch (PorteVerrouilleException e) {
-            System.out.println("La porte est déjà verrouillée");
-        } catch (IllegalBlocException e) {
-            System.out.println("Impossible de construire le bloc");
-        }
+    public static void main(String[] args) {
+
     }
 }
