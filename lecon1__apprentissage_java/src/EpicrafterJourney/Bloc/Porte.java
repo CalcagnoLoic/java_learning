@@ -7,26 +7,28 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Porte extends Bloc {
-    private boolean verrouile;
+
     private static Logger logger = LogManager.getLogger(Porte.class);
 
-    public Porte(final int longueur, final int largeur, final int hauteur, final boolean verrouile) throws IllegalBlocException {
-        super(longueur, largeur, hauteur);
-        this.verrouile = verrouile;
-        this.couleur = Couleur.BLEU;
+    private boolean verrouillee;
+
+    public Porte(final int longueur, final int largeur, final int hauteur, final boolean verrouillee)
+            throws IllegalBlocException {
+        super(longueur, largeur, hauteur, Couleur.BLEU);
+        this.verrouillee = verrouillee;
     }
 
-    public boolean estVerrouilee() {
-        return this.verrouile;
+    public boolean estVerrouillee() {
+        return verrouillee;
     }
 
     public void verrouiller() throws PorteVerrouilleException {
-        if(verrouile){
-            logger.error("La porte est déjà verrouillée");
+        if (verrouillee) {
+            logger.error("La porte ne peut pas être verouillée car c'est déjà le cas.");
             throw new PorteVerrouilleException();
         } else {
-            logger.info("La porte n'est pas verrouillée, je vais la fermer de ce pas!");
-            this.verrouile = true;
+            verrouillee = true;
         }
     }
+
 }
