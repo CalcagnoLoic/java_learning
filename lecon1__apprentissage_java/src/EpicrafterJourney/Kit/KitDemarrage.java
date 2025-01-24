@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class KitDemarrage {
 
@@ -26,6 +27,13 @@ public class KitDemarrage {
 
     public Set<String> getMotsCles() {
         return motsCles;
+    }
+
+    public void afficherKit() {
+        System.out.println("Nombre de blocs dans le kit : " + blocs.size());
+        System.out.println("Liste des mots clés du kit : ");
+
+        this.motsCles.forEach(System.out::print);
     }
 
     public KitDemarrage(final Set<IBloc> blocs) throws IllegalBlocException {

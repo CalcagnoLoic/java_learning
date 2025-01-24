@@ -1,28 +1,20 @@
 package EpicrafterJourney;
 
 import EpicrafterJourney.Bloc.*;
+import EpicrafterJourney.Enum.Type;
 import EpicrafterJourney.Exceptions.IllegalBlocException;
-import EpicrafterJourney.Exceptions.PorteVerrouilleException;
 import EpicrafterJourney.Interface.IBloc;
 import EpicrafterJourney.Kit.KitDemarrage;
-import EpicrafterJourney.Personnage.Hero;
-import EpicrafterJourney.Interface.IPersonnage;
-import EpicrafterJourney.Personnage.Joueur;
-import EpicrafterJourney.Personnage.Mechant;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 
 public class Main {
 
@@ -33,8 +25,21 @@ public class Main {
         logger.info("Lancement du programme Epicrafter's Journey.");
 
         try {
+            Porte porte = new Porte(1,1,1,true);
+            porte.forcerSerrure(cle ->{
+                return cle.matches("[A-Za-z]{3}]");
+            });
+            porte.forcerSerrure(cle -> {
+                return cle.matches("#[A-Za-z]{6}123");
+            });
+        } catch (IllegalBlocException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
             // Le programme commence avec un Kit de démarrage.
             KitDemarrage kit = new KitDemarrage(constructionSetBlocs());
+            kit.afficherKit();
             System.out.println("Vous possédez un kit de démarrage !");
             kit.sauvegarder();
             System.out.println("----Lecture du fichier: ----");
@@ -47,22 +52,18 @@ public class Main {
             if(response.equals("1")){
                 System.out.println("Voici quelques idées de constructions avec le Kit de démarrage : ");
                 Set<String> motsCles = kit.getMotsCles();
-                for(String mot : motsCles) {
-                    System.out.println(mot);
-                }
+                motsCles.forEach(System.out::print);
             }
             if (response.equals("2")){
                 System.out.println("Voici le nombre de blocs de chaque type contenu dans le Kit de démarrage : ");
                 Map<Type, Integer> quantiteBloc = new TreeMap<Type, Integer>(); // La TreeMap permet de trier les entrées par ordre alphabétique de la clé.
-                for (IBloc bloc : kit.getBlocs()) {
+                kit.getBlocs().forEach(bloc ->{
                     Type type = Type.valueOf(bloc.getClass().getSimpleName().toUpperCase());
                     int quantite = quantiteBloc.getOrDefault(type, 0) + 1; // Quantite existante + 1.
                     quantiteBloc.put(type, quantite);
-                }
+                });
                 Set<Type> types = quantiteBloc.keySet();
-                for(Type type : types) {
-                    System.out.println(type.toString() + " " + quantiteBloc.get(type));
-                }
+                types.forEach(type ->System.out.println(type.toString() + " " + quantiteBloc.get(type)));
             }
             System.out.println("La valeur saisie est incorrecte");
         } catch (IllegalBlocException e) {
@@ -94,5 +95,4 @@ public class Main {
 
         return blocs;
     }
-
 }

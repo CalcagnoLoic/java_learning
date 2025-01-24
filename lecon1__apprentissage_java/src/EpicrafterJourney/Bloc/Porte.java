@@ -6,6 +6,8 @@ import EpicrafterJourney.Exceptions.PorteVerrouilleException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.function.Predicate;
+
 public class Porte extends Bloc {
 
     private static Logger logger = LogManager.getLogger(Porte.class);
@@ -31,4 +33,12 @@ public class Porte extends Bloc {
         }
     }
 
+    public void forcerSerrure(Predicate<String> fonction){
+        String dummyCleSecrete = "#secret123";
+        if(this.verrouillee) {
+            if(fonction.test(dummyCleSecrete)){
+                this.verrouillee = false;
+            }
+        }
+    }
 }

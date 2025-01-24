@@ -1,4 +1,4 @@
-package EpicrafterJourney.Bloc;
+package EpicrafterJourney.Enum;
 
 public enum Type {
     MUR,
