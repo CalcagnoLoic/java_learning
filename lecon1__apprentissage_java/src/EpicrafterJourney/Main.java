@@ -11,10 +11,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
 
@@ -22,6 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        long start = System.currentTimeMillis();
         logger.info("Lancement du programme Epicrafter's Journey.");
 
         try {
@@ -52,7 +50,7 @@ public class Main {
             if(response.equals("1")){
                 System.out.println("Voici quelques idées de constructions avec le Kit de démarrage : ");
                 Set<String> motsCles = kit.getMotsCles();
-                motsCles.forEach(System.out::print);
+                motsCles.forEach(motsCle -> System.out.println(motsCle + " "));
             }
             if (response.equals("2")){
                 System.out.println("Voici le nombre de blocs de chaque type contenu dans le Kit de démarrage : ");
@@ -65,7 +63,9 @@ public class Main {
                 Set<Type> types = quantiteBloc.keySet();
                 types.forEach(type ->System.out.println(type.toString() + " " + quantiteBloc.get(type)));
             }
-            System.out.println("La valeur saisie est incorrecte");
+             if (!response.equals("1") && !response.equals("2")) {
+                 System.out.println("La valeur saisie est incorrecte");
+             }
         } catch (IllegalBlocException e) {
             System.out.println("Impossible de construire le Kit de démarrage.");
         } catch (IOException e) {
@@ -73,25 +73,21 @@ public class Main {
         }
 
         logger.info("Arret du programme Epicrafter's Journey.");
+        long end = System.currentTimeMillis();
+        long executionTime = end - start;
+        logger.debug(executionTime + " milliseconds");
     }
 
     private static Set<IBloc> constructionSetBlocs() throws IllegalBlocException {
         Set<IBloc> blocs = new LinkedHashSet<IBloc>();
 
-        // Le kit contient 4 blocs Mur.
-        blocs.add(new Mur(3, 2, 2, true));
-        blocs.add(new Mur(3, 2, 2, true));
-        blocs.add(new Mur(2, 1, 2, false));
-        blocs.add(new Mur(2, 1, 2, false));
-
-        // Le kit contient 1 bloc Porte.
-        blocs.add(new Porte(1, 2, 2, true));
-
-        // Le kit contient 4 blocs Toit.
-        blocs.add(new Toit(3, 1, 1));
-        blocs.add(new Toit(3, 1, 1));
-        blocs.add(new Toit(3, 1, 1));
-        blocs.add(new Toit(3, 1, 1));
+        try {
+            blocs.addAll(Fabrique.creerMur(4));
+            blocs.addAll(Fabrique.creerPorte(2));
+            blocs.addAll(Fabrique.creerToit(3));
+        } catch (Exception e) {
+            logger.error("Erreur pendant la création des blocs: {}", e);
+        }
 
         return blocs;
     }

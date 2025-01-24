@@ -8,7 +8,7 @@
 
 Dans ce repo, on peut retrouver les scripts des différentes leçons suivies sur OpenClassroom.
 
-- `lecon1__apprentissage`: Dans cette leçon, les notions de base de la programmation sur Java sont abordées dans un premier temps. Par la suite, la prise en main de l'orienté objet est appliqué au travers de divers concepts comme l'héritage, le polymorphisme et les classes particulières (Records, Enum, ...). Finalement, cette leçon se cloture sur divers concepts plus avancés comme le flux et les threads. 
+- `lecon1__apprentissage_java`: Dans cette leçon, les notions de base de la programmation sur Java sont abordées dans un premier temps. Par la suite, la prise en main de l'orienté objet est appliqué au travers de divers concepts comme l'héritage, le polymorphisme et les classes particulières (Records, Enum, ...). Finalement, cette leçon se cloture sur divers concepts plus avancés comme le flux et les threads. 
 
 Cours à suivre :
 

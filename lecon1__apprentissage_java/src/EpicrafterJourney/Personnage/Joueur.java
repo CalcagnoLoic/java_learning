@@ -21,6 +21,11 @@ public class Joueur extends Personnage {
     }
 
     @Override
+    public void subiAttaque(int pointsDAttaques) {
+
+    }
+
+    @Override
     public void construireUnBloc(IBloc bloc){
 
     }
