@@ -12,6 +12,9 @@ import EpicrafterJourney.Personnage.Mechant;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -33,28 +36,39 @@ public class Main {
             // Le programme commence avec un Kit de démarrage.
             KitDemarrage kit = new KitDemarrage(constructionSetBlocs());
             System.out.println("Vous possédez un kit de démarrage !");
+            kit.sauvegarder();
+            System.out.println("----Lecture du fichier: ----");
+            kit.charger();
+            System.out.println("----Fin de lecture du fichier: ----");
 
-            // Il affiche les mots clés associés au Kit pour donner des idées à l'utilisateur.
-            System.out.println("Voici quelques idées de constructions avec le Kit de démarrage : ");
-            Set<String> motsCles = kit.getMotsCles();
-            for(String mot : motsCles) {
-                System.out.println(mot);
+            System.out.println("Que souhaitez-vous afficher ? 1 - Les idées de constructions. 2 - Le nombre de blocs pour chaque type de blocs présent dans le kit.");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String response = reader.readLine();
+            if(response.equals("1")){
+                System.out.println("Voici quelques idées de constructions avec le Kit de démarrage : ");
+                Set<String> motsCles = kit.getMotsCles();
+                for(String mot : motsCles) {
+                    System.out.println(mot);
+                }
             }
-
-            // Il affiche à l'utilisateur le nombre de blocs en fonction du type à contenu par le Kit.
-            System.out.println("Voici le nombre de blocs de chaque type contenu dans le Kit de démarrage : ");
-            Map<Type, Integer> quantiteBloc = new TreeMap<Type, Integer>(); // La TreeMap permet de trier les entrées par ordre alphabétique de la clé.
-            for (IBloc bloc : kit.getBlocs()) {
-                Type type = Type.valueOf(bloc.getClass().getSimpleName().toUpperCase());
-                int quantite = quantiteBloc.getOrDefault(type, 0) + 1; // Quantite existante + 1.
-                quantiteBloc.put(type, quantite);
+            if (response.equals("2")){
+                System.out.println("Voici le nombre de blocs de chaque type contenu dans le Kit de démarrage : ");
+                Map<Type, Integer> quantiteBloc = new TreeMap<Type, Integer>(); // La TreeMap permet de trier les entrées par ordre alphabétique de la clé.
+                for (IBloc bloc : kit.getBlocs()) {
+                    Type type = Type.valueOf(bloc.getClass().getSimpleName().toUpperCase());
+                    int quantite = quantiteBloc.getOrDefault(type, 0) + 1; // Quantite existante + 1.
+                    quantiteBloc.put(type, quantite);
+                }
+                Set<Type> types = quantiteBloc.keySet();
+                for(Type type : types) {
+                    System.out.println(type.toString() + " " + quantiteBloc.get(type));
+                }
             }
-            Set<Type> types = quantiteBloc.keySet();
-            for(Type type : types) {
-                System.out.println(type.toString() + " " + quantiteBloc.get(type));
-            }
+            System.out.println("La valeur saisie est incorrecte");
         } catch (IllegalBlocException e) {
             System.out.println("Impossible de construire le Kit de démarrage.");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
         logger.info("Arret du programme Epicrafter's Journey.");
